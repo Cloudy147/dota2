@@ -1,42 +1,47 @@
 body{
-font-family: Arial;
-background:#fff8f2;
-margin:0;
+  font-family: Arial, sans-serif;
+  background:#fff8f2;
+  margin:0;
+  padding-top:70px;
 }
 
+/* NAV */
 .navbar{
-background:#1f1f1f !important;
+  background:#1f1f1f !important;
 }
 
 .navbar a{
-color:white !important;
+  color:white !important;
 }
 
+/* HERO */
 .hero{
-background: linear-gradient(135deg,#ff7e5f,#feb47b);
-color:white;
-text-align:center;
-padding:120px 20px;
+  background: linear-gradient(135deg,#ff7e5f,#feb47b);
+  color:white;
+  text-align:center;
+  padding:120px 20px;
 }
 
+/* CARDS */
 .card{
-border:none;
-border-radius:15px;
-overflow:hidden;
-box-shadow:0 6px 18px rgba(0,0,0,0.1);
+  border:none;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 6px 18px rgba(0,0,0,0.1);
 }
 
 .card img{
-width:100%;
-height:220px;
-object-fit:cover;
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+/* CART */
+.item{
+  display:flex;
+  justify-content:space-between;
+  padding:10px;
+  border-bottom:1px solid #eee;
 }
 
 .hidden{display:none !important;}
-
-.item{
-display:flex;
-justify-content:space-between;
-padding:10px;
-border-bottom:1px solid #eee;
-}
