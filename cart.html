@@ -2,12 +2,13 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Корзина</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-.item {
+.item{
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -17,9 +18,23 @@
 
 <body class="p-4">
 
+<!-- NAV -->
+<nav class="navbar navbar-dark bg-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="index.html">🍰 Bakery</a>
+
+<div>
+<a class="btn btn-outline-light" href="index.html">Главная</a>
+<a class="btn btn-outline-light" href="catalog.html">Меню</a>
+<a class="btn btn-warning" href="cart.html">🛒 Корзина</a>
+</div>
+
+</div>
+</nav>
+
 <div class="container">
 
-<h2 class="mb-4">🛒 Ваша корзина</h2>
+<h2>🛒 Ваша корзина</h2>
 
 <div id="cart"></div>
 
@@ -27,57 +42,121 @@
 
 <h4 id="total">Итого: 0 AZN</h4>
 
-<button class="btn btn-danger mt-3" onclick="clearCart()">
+<!-- PAYMENT -->
+<div class="mt-4">
+<h5>💳 Способ оплаты</h5>
+
+<select id="payment" class="form-select w-50">
+<option value="cash">💵 Наличные</option>
+<option value="card">💳 Карта</option>
+<option value="online">🌐 Онлайн-оплата</option>
+</select>
+</div>
+
+<!-- ACTIONS -->
+<div class="mt-4">
+<button class="btn btn-success" onclick="checkout()">
+Оформить заказ
+</button>
+
+<button class="btn btn-danger" onclick="clearCart()">
 Очистить корзину
 </button>
+</div>
 
 </div>
 
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function render() {
-    let box = document.getElementById("cart");
-    box.innerHTML = "";
+function render(){
 
-    let total = 0;
+let box=document.getElementById("cart");
+box.innerHTML="";
 
-    if (cart.length === 0) {
-        box.innerHTML = "<p>Корзина пустая 😕</p>";
-        document.getElementById("total").innerText = "Итого: 0 AZN";
-        return;
-    }
+let total=0;
 
-    cart.forEach((item, index) => {
-        total += item.price;
-
-        box.innerHTML += `
-            <div class="border p-3 mb-2 item">
-                <div>
-                    <b>${item.name}</b><br>
-                    ${item.price} AZN
-                </div>
-
-                <button class="btn btn-sm btn-outline-danger" onclick="removeItem(${index})">
-                    Удалить
-                </button>
-            </div>
-        `;
-    });
-
-    document.getElementById("total").innerText = "Итого: " + total + " AZN";
+if(cart.length===0){
+box.innerHTML="<p>Корзина пустая 😕</p>";
+document.getElementById("total").innerText="Итого: 0 AZN";
+return;
 }
 
-function removeItem(index) {
-    cart.splice(index, 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    render();
+cart.forEach((item,index)=>{
+
+total += item.price * item.qty;
+
+box.innerHTML += `
+<div class="border p-3 mb-2 item">
+<div>
+<b>${item.name}</b><br>
+${item.price} AZN × ${item.qty}
+</div>
+
+<div>
+<button class="btn btn-sm btn-success" onclick="plus(${index})">+</button>
+<button class="btn btn-sm btn-warning" onclick="minus(${index})">-</button>
+<button class="btn btn-sm btn-danger" onclick="removeItem(${index})">X</button>
+</div>
+</div>
+`;
+});
+
+document.getElementById("total").innerText="Итого: " + total + " AZN";
 }
 
-function clearCart() {
-    cart = [];
-    localStorage.removeItem("cart");
-    render();
+function plus(i){
+cart[i].qty++;
+save();
+}
+
+function minus(i){
+cart[i].qty--;
+if(cart[i].qty<=0) cart.splice(i,1);
+save();
+}
+
+function removeItem(i){
+cart.splice(i,1);
+save();
+}
+
+function clearCart(){
+cart=[];
+save();
+}
+
+function save(){
+localStorage.setItem("cart",JSON.stringify(cart));
+render();
+}
+
+/* 🔥 ОФОРМЛЕНИЕ ЗАКАЗА */
+function checkout(){
+
+if(cart.length===0){
+alert("Корзина пустая!");
+return;
+}
+
+let payment = document.getElementById("payment").value;
+
+let total = cart.reduce((sum,item)=>sum + item.price*item.qty,0);
+
+let text = "";
+
+if(payment==="cash") text="Наличные";
+if(payment==="card") text="Карта";
+if(payment==="online") text="Онлайн-оплата";
+
+alert(
+"✅ Заказ оформлен!\n" +
+"💰 Сумма: " + total + " AZN\n" +
+"💳 Оплата: " + text
+);
+
+cart=[];
+save();
 }
 
 render();
