@@ -7,6 +7,18 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+
+<style>
+.filter-btn{
+    margin:5px;
+    border-radius:10px;
+}
+
+.hidden{
+    display:none !important;
+}
+</style>
+
 </head>
 
 <body>
@@ -21,15 +33,26 @@
 <a class="btn btn-outline-light" href="about.html">О нас</a>
 <a class="btn btn-warning" href="cart.html">🛒</a>
 </div>
-
 </div>
 </nav>
 
+<!-- FILTER -->
+<div class="container text-center mt-4">
+
+<button class="btn btn-dark filter-btn" onclick="filter('all')">Все</button>
+<button class="btn btn-outline-dark filter-btn" onclick="filter('cake')">Торты</button>
+<button class="btn btn-outline-dark filter-btn" onclick="filter('bakery')">Выпечка</button>
+<button class="btn btn-outline-dark filter-btn" onclick="filter('sweet')">Сладости</button>
+<button class="btn btn-outline-dark filter-btn" onclick="filter('ice')">Мороженое</button>
+
+</div>
+
+<!-- PRODUCTS -->
 <div class="container mt-4">
 <div class="row">
 
-<!-- 1 -->
-<div class="col-md-4 mb-4">
+<!-- CAKE -->
+<div class="col-md-4 mb-4 product cake">
 <div class="card">
 <img src="https://images.unsplash.com/photo-1542826438-bd32f43d626f">
 <div class="p-3 text-center">
@@ -42,12 +65,12 @@
 </div>
 </div>
 
-<!-- 2 -->
-<div class="col-md-4 mb-4">
+<!-- BAKERY -->
+<div class="col-md-4 mb-4 product bakery">
 <div class="card">
 <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff">
 <div class="p-3 text-center">
-<h5>Круассаны</h5>
+<h5>Круассан</h5>
 <p>6 AZN</p>
 <button class="btn btn-success" onclick="add('Круассан',6,this,'https://images.unsplash.com/photo-1509440159596-0249088772ff')">
 В корзину
@@ -56,22 +79,8 @@
 </div>
 </div>
 
-<!-- 3 (ЗАМЕНЕН ЧИЗКЕЙК) -->
-<div class="col-md-4 mb-4">
-<div class="card">
-<img src="https://images.unsplash.com/photo-1551024506-0bccd828d307">
-<div class="p-3 text-center">
-<h5>Чизкейк</h5>
-<p>10 AZN</p>
-<button class="btn btn-success" onclick="add('Чизкейк',10,this,'https://images.unsplash.com/photo-1551024506-0bccd828d307')">
-В корзину
-</button>
-</div>
-</div>
-</div>
-
-<!-- 4 -->
-<div class="col-md-4 mb-4">
+<!-- SWEET -->
+<div class="col-md-4 mb-4 product sweet">
 <div class="card">
 <img src="https://images.unsplash.com/photo-1559628233-100c798642d4">
 <div class="p-3 text-center">
@@ -84,22 +93,8 @@
 </div>
 </div>
 
-<!-- 5 -->
-<div class="col-md-4 mb-4">
-<div class="card">
-<img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d">
-<div class="p-3 text-center">
-<h5>Пончик</h5>
-<p>5 AZN</p>
-<button class="btn btn-success" onclick="add('Пончик',5,this,'https://images.unsplash.com/photo-1486427944299-d1955d23e34d')">
-В корзину
-</button>
-</div>
-</div>
-</div>
-
-<!-- 6 -->
-<div class="col-md-4 mb-4">
+<!-- ICE -->
+<div class="col-md-4 mb-4 product ice">
 <div class="card">
 <img src="https://images.unsplash.com/photo-1505250469679-203ad9ced0cb">
 <div class="p-3 text-center">
@@ -112,9 +107,42 @@
 </div>
 </div>
 
+<!-- CAKE 2 -->
+<div class="col-md-4 mb-4 product cake">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1551024506-0bccd828d307">
+<div class="p-3 text-center">
+<h5>Чизкейк</h5>
+<p>10 AZN</p>
+<button class="btn btn-success" onclick="add('Чизкейк',10,this,'https://images.unsplash.com/photo-1551024506-0bccd828d307')">
+В корзину
+</button>
+</div>
+</div>
+</div>
+
 </div>
 </div>
 
 <script src="script.js"></script>
+
+<script>
+function filter(type){
+
+let items = document.querySelectorAll(".product");
+
+items.forEach(el=>{
+if(type==="all"){
+el.classList.remove("hidden");
+}else{
+el.classList.contains(type)
+? el.classList.remove("hidden")
+: el.classList.add("hidden");
+}
+});
+
+}
+</script>
+
 </body>
 </html>
