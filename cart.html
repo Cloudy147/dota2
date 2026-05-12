@@ -9,13 +9,15 @@
 
 <body>
 
-<nav class="navbar navbar-dark bg-dark p-3">
+<nav class="navbar navbar-dark bg-dark fixed-top">
 <div class="container">
+
 <a class="navbar-brand" href="index.html">🍰 Bakery</a>
 
-<div>
-<a class="btn btn-outline-light" href="catalog.html">Меню</a>
+<div class="d-flex gap-2">
+<a class="btn btn-outline-light" href="catalog.html">Каталог</a>
 </div>
+
 </div>
 </nav>
 
@@ -27,14 +29,22 @@
 
 <h4 id="total">0 AZN</h4>
 
-<select id="pay" class="form-select w-50">
+<!-- PAYMENT -->
+<select id="pay" class="form-select w-50" onchange="toggleCardForm()">
 <option value="cash">Наличные</option>
 <option value="card">Карта</option>
 <option value="online">Онлайн</option>
 </select>
 
-<button class="btn btn-success mt-3" onclick="checkout()">Оформить</button>
-<button class="btn btn-danger mt-3" onclick="clearCart()">Очистить</button>
+<!-- CARD FORM -->
+<div id="cardForm" class="mt-3" style="display:none; max-width:400px;">
+  <input class="form-control mb-2" id="cardNumber" placeholder="Номер карты">
+  <input class="form-control mb-2" id="cardName" placeholder="Имя на карте">
+  <input class="form-control mb-2" id="cardDate" placeholder="MM/YY">
+  <input class="form-control mb-2" id="cardCvv" placeholder="CVV">
+</div>
+
+<button class="btn btn-success mt-3" onclick="checkout()">Оформить заказ</button>
 
 </div>
 
@@ -42,32 +52,24 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function save(){
-localStorage.setItem("cart",JSON.stringify(cart));
+localStorage.setItem("cart", JSON.stringify(cart));
 render();
 }
 
 function render(){
-
 let box=document.getElementById("cart");
 box.innerHTML="";
-
 let total=0;
 
-if(cart.length===0){
-box.innerHTML="Пусто";
-return;
-}
-
 cart.forEach((i,idx)=>{
-total += i.price*i.qty;
+total+=i.price*i.qty;
 
-box.innerHTML += `
+box.innerHTML+=`
 <div class="item">
-<div>${i.name}<br>${i.price} AZN × ${i.qty}</div>
+<div>${i.name} ${i.price}×${i.qty}</div>
 <div>
 <button onclick="plus(${idx})">+</button>
 <button onclick="minus(${idx})">-</button>
-<button onclick="del(${idx})">x</button>
 </div>
 </div>`;
 });
@@ -77,17 +79,45 @@ document.getElementById("total").innerText="Итого: "+total+" AZN";
 
 function plus(i){cart[i].qty++;save();}
 function minus(i){cart[i].qty--;if(cart[i].qty<=0)cart.splice(i,1);save();}
-function del(i){cart.splice(i,1);save();}
-function clearCart(){cart=[];save();}
 
+/* SHOW CARD FORM */
+function toggleCardForm(){
+let pay=document.getElementById("pay").value;
+document.getElementById("cardForm").style.display = pay==="card" ? "block" : "none";
+}
+
+/* CHECKOUT */
 function checkout(){
 
-if(cart.length===0)return alert("Пусто");
+if(cart.length===0){
+alert("Корзина пустая");
+return;
+}
 
 let pay=document.getElementById("pay").value;
+
+/* если карта */
+if(pay==="card"){
+
+let number=document.getElementById("cardNumber").value;
+let name=document.getElementById("cardName").value;
+let date=document.getElementById("cardDate").value;
+let cvv=document.getElementById("cardCvv").value;
+
+if(!number || !name || !date || !cvv){
+alert("Заполните данные карты");
+return;
+}
+
+if(number.length < 12){
+alert("Неверный номер карты");
+return;
+}
+}
+
 let total=cart.reduce((s,i)=>s+i.price*i.qty,0);
 
-alert("Заказ оформлен\nОплата: "+pay+"\nСумма: "+total);
+alert("Заказ оформлен!\nОплата: "+pay+"\nСумма: "+total+" AZN");
 
 cart=[];
 save();
