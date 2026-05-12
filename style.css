@@ -1,0 +1,194 @@
+/* =======================
+   BASE
+======================= */
+
+body{
+    font-family: Arial, sans-serif;
+    background:#fff8f2;
+    margin:0;
+    padding:0;
+}
+
+/* =======================
+   NAVBAR
+======================= */
+
+.navbar{
+    background:#1f1f1f !important;
+    padding:12px 0;
+}
+
+.navbar-brand{
+    font-weight:bold;
+    color:#fff !important;
+}
+
+.navbar a{
+    color:white !important;
+    text-decoration:none;
+}
+
+.navbar .btn{
+    border-radius:10px;
+}
+
+/* =======================
+   HERO SECTION
+======================= */
+
+.hero{
+    background: linear-gradient(135deg,#ff7e5f,#feb47b);
+    color:white;
+    padding:110px 20px;
+    text-align:center;
+    border-radius:0 0 30px 30px;
+}
+
+.hero h1{
+    font-size:52px;
+    font-weight:bold;
+}
+
+.hero p{
+    font-size:18px;
+    opacity:0.9;
+}
+
+/* =======================
+   BUTTONS
+======================= */
+
+.btn-main{
+    padding:12px 22px;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+.btn-success{
+    border-radius:10px;
+}
+
+/* =======================
+   PRODUCT CARD
+======================= */
+
+.card{
+    border:none;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 6px 18px rgba(0,0,0,0.1);
+    transition:0.3s;
+    background:white;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+}
+
+.card img{
+    height:240px;
+    width:100%;
+    object-fit:cover;
+}
+
+/* =======================
+   SECTIONS
+======================= */
+
+.container{
+    max-width:1100px;
+}
+
+/* =======================
+   BOX / CART
+======================= */
+
+.box{
+    max-width:900px;
+    margin:40px auto;
+    background:white;
+    padding:20px;
+    border-radius:16px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.1);
+}
+
+/* =======================
+   CART ITEM
+======================= */
+
+.item{
+    display:flex;
+    justify-content:space-between;
+    padding:12px;
+    border-bottom:1px solid #eee;
+}
+
+/* =======================
+   ANIMATION (cart fly)
+======================= */
+
+.fly{
+    position:fixed;
+    width:50px;
+    height:50px;
+    border-radius:10px;
+    z-index:9999;
+    transition:0.8s cubic-bezier(.2,.8,.2,1);
+    pointer-events:none;
+}
+
+/* bounce cart icon */
+.cart-bounce{
+    animation:bounce 0.4s;
+}
+
+@keyframes bounce{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.4);}
+    100%{transform:scale(1);}
+}
+
+/* =======================
+   SALE BADGE
+======================= */
+
+.sale-price{
+    color:red;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.old-price{
+    color:gray;
+    text-decoration:line-through;
+    margin-left:8px;
+    font-size:14px;
+}
+
+/* =======================
+   FOOTER
+======================= */
+
+footer{
+    background:#1f1f1f;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:50px;
+}
+
+/* =======================
+   UTILITIES
+======================= */
+
+.text-center{
+    text-align:center;
+}
+
+.mt-4{
+    margin-top:20px;
+}
+
+.mt-5{
+    margin-top:40px;
+}
