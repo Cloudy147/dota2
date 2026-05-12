@@ -6,28 +6,27 @@
 <title>Меню</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
 
 <style>
-.filter-btn{
-    margin:5px;
-    border-radius:10px;
-}
-
+.filter-btn{margin:5px;border-radius:10px;}
 .hidden{display:none !important;}
+
+.card img{
+    height:220px;
+    object-fit:cover;
+}
 </style>
 </head>
 
 <body>
 
-<nav class="navbar navbar-dark">
+<nav class="navbar navbar-dark bg-dark">
 <div class="container">
 <a class="navbar-brand" href="index.html">🍰 Bakery</a>
 
 <div>
 <a class="btn btn-outline-light" href="index.html">Главная</a>
 <a class="btn btn-outline-light" href="catalog.html">Меню</a>
-<a class="btn btn-outline-light" href="about.html">О нас</a>
 <a class="btn btn-warning" href="cart.html">🛒</a>
 </div>
 
@@ -40,92 +39,89 @@
 <button class="btn btn-dark filter-btn" onclick="filter('all')">Все</button>
 <button class="btn btn-outline-dark filter-btn" onclick="filter('cake')">Торты</button>
 <button class="btn btn-outline-dark filter-btn" onclick="filter('bakery')">Выпечка</button>
+<button class="btn btn-outline-dark filter-btn" onclick="filter('pastry')">Пирожные</button>
 <button class="btn btn-outline-dark filter-btn" onclick="filter('sweet')">Сладости</button>
-<button class="btn btn-outline-dark filter-btn" onclick="filter('ice')">Мороженое</button>
 
 </div>
 
 <div class="container mt-4">
 <div class="row">
 
-<!-- 🍰 CAKE -->
+<!-- CAKE -->
 <div class="col-md-4 mb-4 product cake">
 <div class="card">
 <img src="https://images.unsplash.com/photo-1542826438-bd32f43d626f">
 <div class="p-3 text-center">
 <h5>Шоколадный торт</h5>
 <p>12 AZN</p>
-<button class="btn btn-success" onclick="add('Шоколадный торт',12,this,'https://images.unsplash.com/photo-1542826438-bd32f43d626f')">
+<button class="btn btn-success" onclick="add('Шоколадный торт',12)">
 В корзину
 </button>
 </div>
 </div>
 </div>
 
-<!-- 🍞 BAKERY -->
+<div class="col-md-4 mb-4 product cake">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587">
+<div class="p-3 text-center">
+<h5>Чизкейк</h5>
+<p>10 AZN</p>
+<button class="btn btn-success" onclick="add('Чизкейк',10)">
+В корзину
+</button>
+</div>
+</div>
+</div>
+
+<!-- BAKERY -->
+<div class="col-md-4 mb-4 product bakery">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73">
+<div class="p-3 text-center">
+<h5>Булочка с корицей</h5>
+<p>5 AZN</p>
+<button class="btn btn-success" onclick="add('Булочка с корицей',5)">
+В корзину
+</button>
+</div>
+</div>
+</div>
+
 <div class="col-md-4 mb-4 product bakery">
 <div class="card">
 <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff">
 <div class="p-3 text-center">
-<h5>Круассан</h5>
-<p>6 AZN</p>
-<button class="btn btn-success" onclick="add('Круассан',6,this,'https://images.unsplash.com/photo-1509440159596-0249088772ff')">
+<h5>Хлеб ремесленный</h5>
+<p>4 AZN</p>
+<button class="btn btn-success" onclick="add('Хлеб',4)">
 В корзину
 </button>
 </div>
 </div>
 </div>
 
-<!-- 🍰 CAKE 2 -->
-<div class="col-md-4 mb-4 product cake">
+<!-- PASTRY -->
+<div class="col-md-4 mb-4 product pastry">
 <div class="card">
-<img src="https://images.unsplash.com/photo-1551024506-0bccd828d307">
+<img src="https://images.unsplash.com/photo-1519915028121-7d3463d20b13">
 <div class="p-3 text-center">
-<h5>Чизкейк</h5>
-<p>10 AZN</p>
-<button class="btn btn-success" onclick="add('Чизкейк',10,this,'https://images.unsplash.com/photo-1551024506-0bccd828d307')">
-В корзину
-</button>
-</div>
-</div>
-</div>
-
-<!-- 🍬 SWEET -->
-<div class="col-md-4 mb-4 product sweet">
-<div class="card">
-<img src="https://images.unsplash.com/photo-1559628233-100c798642d4">
-<div class="p-3 text-center">
-<h5>Макаруны</h5>
-<p>8 AZN</p>
-<button class="btn btn-success" onclick="add('Макаруны',8,this,'https://images.unsplash.com/photo-1559628233-100c798642d4')">
-В корзину
-</button>
-</div>
-</div>
-</div>
-
-<!-- 🍩 SWEET 2 -->
-<div class="col-md-4 mb-4 product sweet">
-<div class="card">
-<img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d">
-<div class="p-3 text-center">
-<h5>Пончик</h5>
-<p>5 AZN</p>
-<button class="btn btn-success" onclick="add('Пончик',5,this,'https://images.unsplash.com/photo-1486427944299-d1955d23e34d')">
-В корзину
-</button>
-</div>
-</div>
-</div>
-
-<!-- 🍦 ICE -->
-<div class="col-md-4 mb-4 product ice">
-<div class="card">
-<img src="https://images.unsplash.com/photo-1505250469679-203ad9ced0cb">
-<div class="p-3 text-center">
-<h5>Мороженое</h5>
+<h5>Эклер</h5>
 <p>7 AZN</p>
-<button class="btn btn-success" onclick="add('Мороженое',7,this,'https://images.unsplash.com/photo-1505250469679-203ad9ced0cb')">
+<button class="btn btn-success" onclick="add('Эклер',7)">
+В корзину
+</button>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 mb-4 product pastry">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1551024601-bec78aea704b">
+<div class="p-3 text-center">
+<h5>Кекс</h5>
+<p>6 AZN</p>
+<button class="btn btn-success" onclick="add('Кекс',6)">
 В корзину
 </button>
 </div>
@@ -139,8 +135,7 @@
 
 <script>
 function filter(type){
-
-let items = document.querySelectorAll(".product");
+let items=document.querySelectorAll(".product");
 
 items.forEach(el=>{
 if(type==="all"){
@@ -151,7 +146,6 @@ el.classList.contains(type)
 : el.classList.add("hidden");
 }
 });
-
 }
 </script>
 
